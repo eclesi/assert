@@ -1,125 +1,123 @@
-import { uniq } from "lodash";
+import { uniq } from 'lodash'
 
-import AssertChain from "./assertChain";
-import AssertSchema from "./assertSchema";
-import EmailAssert from "./assert/emailAssert";
-import LengthMaximumAssert from "./assert/lengthMaximumAssert";
-import LengthMinimumAssert from "./assert/lengthMinimumAssert";
-import OptionalAssert from "./assert/optionalAssert";
-import RequiredAssert from "./assert/requiredAssert";
-import StringAssert from "./assert/stringAssert";
-import UuidAssert from "./assert/uuidAssert";
-import PhoneAssert from "./assert/phoneAssert";
-import { AnySchema, Violations } from "./types";
+import AssertChain from './assertChain'
+import AssertSchema from './assertSchema'
+import EmailAssert from './assert/emailAssert'
+import LengthMaximumAssert from './assert/lengthMaximumAssert'
+import LengthMinimumAssert from './assert/lengthMinimumAssert'
+import OptionalAssert from './assert/optionalAssert'
+import RequiredAssert from './assert/requiredAssert'
+import StringAssert from './assert/stringAssert'
+import UuidAssert from './assert/uuidAssert'
+import PhoneAssert from './assert/phoneAssert'
+import { AnySchema, Violations } from './types.d'
 
 export class Assert {
-  public headAssert: AssertChain;
-  public tailAssert: AssertChain;
+  public headAssert: AssertChain
+  public tailAssert: AssertChain
 
   static required(): Assert {
-    const assert = new RequiredAssert();
+    const assert = new RequiredAssert()
 
-    const validator = new Assert();
-    validator.headAssert = assert;
-    validator.tailAssert = assert;
+    const validator = new Assert()
+    validator.headAssert = assert
+    validator.tailAssert = assert
 
-    return validator;
+    return validator
   }
 
   static optional(): Assert {
-    const assert = new OptionalAssert();
+    const assert = new OptionalAssert()
 
-    const validator = new Assert();
-    validator.headAssert = assert;
-    validator.tailAssert = assert;
+    const validator = new Assert()
+    validator.headAssert = assert
+    validator.tailAssert = assert
 
-    return validator;
+    return validator
   }
 
   static schemaStrict(schema: AnySchema): AssertSchema {
-    return new AssertSchema(schema, true);
+    return new AssertSchema(schema, true)
   }
 
   static schemaLoose(schema: AnySchema): AssertSchema {
-    return new AssertSchema(schema, false);
+    return new AssertSchema(schema, false)
   }
 
   string(): Assert {
-    const assert = new StringAssert();
-    this.tail(assert);
+    const assert = new StringAssert()
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   email(): Assert {
-    const assert = new EmailAssert();
-    this.tail(assert);
+    const assert = new EmailAssert()
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   assert(assert: AssertChain): Assert {
-    this.tail(assert);
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   phone(): Assert {
-    const assert = new PhoneAssert();
-    this.tail(assert);
+    const assert = new PhoneAssert()
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   lengthMinimum(minimum: number): Assert {
-    const assert = new LengthMinimumAssert(minimum);
-    this.tail(assert);
+    const assert = new LengthMinimumAssert(minimum)
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   lengthMaximum(maximum: number): Assert {
-    const assert = new LengthMaximumAssert(maximum);
-    this.tail(assert);
+    const assert = new LengthMaximumAssert(maximum)
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   uuid(): Assert {
-    const assert = new UuidAssert();
-    this.tail(assert);
+    const assert = new UuidAssert()
+    this.tail(assert)
 
-    return this;
+    return this
   }
 
   async validateAsync(value: unknown): Promise<Violations | undefined> {
-    const violations = await this.headAssert.validate([], value);
+    const violations = await this.headAssert.validate([], value)
 
     if (violations.length === 0) {
-      return undefined;
+      return undefined
     }
 
-    return uniq(violations);
+    return uniq(violations)
   }
 
   validate(value: unknown): Violations | undefined {
-    const violations = this.headAssert.validate([], value);
+    const violations = this.headAssert.validate([], value)
 
     if (violations instanceof Promise) {
-      throw new Error(
-        "Please use the method `validateAsync` to resolve the asynchronous asserts"
-      );
+      throw new Error('Please use the method `validateAsync` to resolve the asynchronous asserts')
     }
 
     if (violations.length === 0) {
-      return undefined;
+      return undefined
     }
 
-    return uniq(violations);
+    return uniq(violations)
   }
 
   protected tail(assert: AssertChain): void {
-    this.tailAssert.addNext(assert);
-    this.tailAssert = assert;
+    this.tailAssert.addNext(assert)
+    this.tailAssert = assert
   }
 }

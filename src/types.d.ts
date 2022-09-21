@@ -1,15 +1,15 @@
-import { Assert } from ".";
+import { Assert } from './assert'
 
-export type Violations = string[];
+export type Violations = string[]
 
 export type AnyInput = {
-  [key: string]: unknown;
-};
+  [key: string]: unknown
+}
 
 export type AnySchema = {
-  [key: string]: Assert | AnySchema;
-};
+  [key: string]: Assert | AnySchema
+}
 
 export type SchemaViolation = {
-  [key: string]: Violations | SchemaViolation;
-};
+  [key: string]: Violations | SchemaViolation
+}

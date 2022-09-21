@@ -1,25 +1,19 @@
-import { Violations } from "@/types";
+import { Violations } from '@/types'
 
 export default abstract class AssertChain {
-  protected nextAssert?: AssertChain;
+  protected nextAssert?: AssertChain
 
-  abstract validate(
-    violations: Violations,
-    value: unknown
-  ): Promise<Violations> | Violations;
+  abstract validate(violations: Violations, value: unknown): Promise<Violations> | Violations
 
   addNext(assert: AssertChain): void {
-    this.nextAssert = assert;
+    this.nextAssert = assert
   }
 
-  next(
-    violations: Violations,
-    value: unknown
-  ): Promise<Violations> | Violations {
+  next(violations: Violations, value: unknown): Promise<Violations> | Violations {
     if (this.nextAssert) {
-      return this.nextAssert.validate(violations, value);
+      return this.nextAssert.validate(violations, value)
     }
 
-    return violations;
+    return violations
   }
 }
