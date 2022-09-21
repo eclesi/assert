@@ -1,5 +1,5 @@
 import AssertChain from '@/assertChain'
-import { Violations } from '@/types.d'
+import { Violations } from '@/types'
 
 export default class EmailAssert extends AssertChain {
   public static readonly CODE = 'email_type_mismatch'

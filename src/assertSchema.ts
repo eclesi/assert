@@ -1,7 +1,7 @@
 import { get, set, isEmpty, isObject, keys } from 'lodash'
 import RequiredAssert from './assert/requiredAssert'
 import { Assert } from './assert'
-import { AnySchema, SchemaViolation } from './types.d'
+import { AnySchema, SchemaViolation } from './types'
 
 export default class AssertSchema {
   constructor(protected readonly schema: AnySchema, protected readonly strict: boolean) {}

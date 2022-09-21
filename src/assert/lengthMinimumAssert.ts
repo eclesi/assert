@@ -1,33 +1,30 @@
-import AssertChain from "@/assertChain";
-import { Violations } from "@/types";
+import AssertChain from '@/assertChain'
+import { Violations } from '@/types'
 
 export default class LengthMinimumAssert extends AssertChain {
-  public static readonly CODE = "length_out_of_minimum";
+  public static readonly CODE = 'length_out_of_minimum'
 
   constructor(protected readonly minimum: number) {
-    super();
+    super()
   }
 
   static isValid(minimum: number, value: unknown): boolean {
-    if (typeof value !== "string") {
-      return false;
+    if (typeof value !== 'string') {
+      return false
     }
 
     if (value.length < minimum) {
-      return false;
+      return false
     }
 
-    return true;
+    return true
   }
 
-  validate(
-    violations: Violations,
-    value: unknown
-  ): Promise<Violations> | Violations {
+  validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
     if (LengthMinimumAssert.isValid(this.minimum, value)) {
-      violations.push(LengthMinimumAssert.CODE);
+      violations.push(LengthMinimumAssert.CODE)
     }
 
-    return this.next(violations, value);
+    return this.next(violations, value)
   }
 }

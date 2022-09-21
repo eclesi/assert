@@ -10,7 +10,7 @@ import RequiredAssert from './assert/requiredAssert'
 import StringAssert from './assert/stringAssert'
 import UuidAssert from './assert/uuidAssert'
 import PhoneAssert from './assert/phoneAssert'
-import { AnySchema, Violations } from './types.d'
+import { AnySchema, Violations } from './types'
 
 export class Assert {
   public headAssert: AssertChain
