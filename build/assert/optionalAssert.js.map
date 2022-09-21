@@ -1,1 +1,0 @@
-{"version":3,"file":"optionalAssert.js","sourceRoot":"","sources":["../../src/assert/optionalAssert.ts"],"names":[],"mappings":"AACA,OAAO,WAAW,MAAM,eAAe,CAAA;AAEvC,MAAM,CAAC,OAAO,OAAO,cAAe,SAAQ,WAAW;IACrD,QAAQ,CAAC,UAAsB,EAAE,KAAc;QAC7C,IAAI,OAAO,KAAK,KAAK,WAAW,EAAE;YAChC,OAAO,EAAE,CAAA;SACV;QAED,OAAO,IAAI,CAAC,IAAI,CAAC,UAAU,EAAE,KAAK,CAAC,CAAA;IACrC,CAAC;CACF"}
