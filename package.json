@@ -1,7 +1,7 @@
 {
   "name": "eclesi-assert",
   "description": "Schema validation library",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "author": "Alef Castelo <alefaraujocastelo@gmail.com>",
   "license": "MIT",
   "keywords": [
