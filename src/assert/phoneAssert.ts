@@ -1,9 +1,9 @@
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import { Violations } from '@/types'
-import AssertChain from '@/assertChain'
+import { AssertChain } from '@/assertChain'
 
-export default class PhoneAssert extends AssertChain {
+export class PhoneAssert extends AssertChain {
   public readonly CODE = 'phone_type_mismatch'
 
   validate(violations: Violations, value: unknown): Promise<Violations> | Violations {

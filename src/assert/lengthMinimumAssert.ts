@@ -1,7 +1,7 @@
-import AssertChain from '@/assertChain'
+import { AssertChain } from '@/assertChain'
 import { Violations } from '@/types'
 
-export default class LengthMinimumAssert extends AssertChain {
+export class LengthMinimumAssert extends AssertChain {
   public static readonly CODE = 'length_out_of_minimum'
 
   constructor(protected readonly minimum: number) {

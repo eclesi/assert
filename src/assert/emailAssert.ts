@@ -1,7 +1,7 @@
-import AssertChain from '@/assertChain'
+import { AssertChain } from '@/assertChain'
 import { Violations } from '@/types'
 
-export default class EmailAssert extends AssertChain {
+export class EmailAssert extends AssertChain {
   public static readonly CODE = 'email_type_mismatch'
   public static readonly REGEX =
     /([a-z]+[a-z0-9]*[_\.]?[a-z0-9]+)@(([a-z0-9]+\.)*[a-z0-9]{2,}\.)+[a-z]{2,}/

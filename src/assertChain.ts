@@ -1,6 +1,6 @@
 import { Violations } from '@/types'
 
-export default abstract class AssertChain {
+export abstract class AssertChain {
   protected nextAssert?: AssertChain
 
   abstract validate(violations: Violations, value: unknown): Promise<Violations> | Violations

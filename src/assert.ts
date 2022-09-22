@@ -1,17 +1,17 @@
 import { uniq } from 'lodash'
 
 import { AnySchema, Violations } from './types'
-import AssertChain from './assertChain'
-import AssertSchema from './assertSchema'
-import EmailAssert from './assert/emailAssert'
-import LengthMaximumAssert from './assert/lengthMaximumAssert'
-import LengthMinimumAssert from './assert/lengthMinimumAssert'
-import NumberAssert from './assert/numberAssert'
-import OptionalAssert from './assert/optionalAssert'
-import PhoneAssert from './assert/phoneAssert'
-import RequiredAssert from './assert/requiredAssert'
-import StringAssert from './assert/stringAssert'
-import UuidAssert from './assert/uuidAssert'
+import { AssertChain } from './assertChain'
+import { AssertSchema } from './assertSchema'
+import { EmailAssert } from './assert/emailAssert'
+import { LengthMaximumAssert } from './assert/lengthMaximumAssert'
+import { LengthMinimumAssert } from './assert/lengthMinimumAssert'
+import { NumberAssert } from './assert/numberAssert'
+import { OptionalAssert } from './assert/optionalAssert'
+import { PhoneAssert } from './assert/phoneAssert'
+import { RequiredAssert } from './assert/requiredAssert'
+import { StringAssert } from './assert/stringAssert'
+import { UuidAssert } from './assert/uuidAssert'
 
 export class Assert {
   public headAssert: AssertChain

@@ -1,7 +1,7 @@
 import { Violations } from '@/types'
-import AssertChain from '@/assertChain'
+import { AssertChain } from '@/assertChain'
 
-export default class StringAssert extends AssertChain {
+export class StringAssert extends AssertChain {
   public readonly CODE = 'string_type_mismatch'
 
   validate(violations: Violations, value: unknown): Promise<Violations> | Violations {

@@ -1,7 +1,7 @@
-import AssertChain from '@/assertChain'
+import { AssertChain } from '@/assertChain'
 import { Violations } from '@/types'
 
-export default class LengthMaximumAssert extends AssertChain {
+export class LengthMaximumAssert extends AssertChain {
   public static readonly CODE = 'length_out_of_maximum'
 
   constructor(protected readonly maximum: number) {
