@@ -1,5 +1,5 @@
-import { Violations } from '@/types'
-import { AssertChain } from '@/assertChain'
+import { AssertChain } from '../assertChain'
+import { Violations } from '../types'
 
 export class OptionalAssert extends AssertChain {
   validate(violations: Violations, value: unknown): Promise<Violations> | Violations {

@@ -4,7 +4,6 @@
     "require": ["tsconfig-paths/register"]
   },
   "compilerOptions": {
-    "types": ["node", "jest"],
     "paths": {
       "@/test/*": ["./test/*"],
       "@/*": ["./src/*"]

@@ -12,7 +12,7 @@ describe('Assert Schema', () => {
       schema: ['strict_type_mismatch'],
       email: ['required', 'string_type_mismatch', 'email_type_mismatch'],
       phone: ['required', 'string_type_mismatch', 'phone_type_mismatch'],
-      password: ['required', 'string_type_mismatch']
+      password: ['required', 'string_type_mismatch', 'length_out_of_minimum']
     })
   })
 

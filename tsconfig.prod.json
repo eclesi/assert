@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es6",
     "module": "CommonJS",
-    "moduleResolution": "Node",
+    "declaration": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "emitDecoratorMetadata": true,
-    "types": ["node"],
-    "strictNullChecks": true,
     "baseUrl": ".",
     "outDir": "./build",
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"]
     }

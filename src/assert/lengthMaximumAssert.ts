@@ -1,5 +1,5 @@
-import { AssertChain } from '@/assertChain'
-import { Violations } from '@/types'
+import { AssertChain } from '../assertChain'
+import { Violations } from '../types'
 
 export class LengthMaximumAssert extends AssertChain {
   public static readonly CODE = 'length_out_of_maximum'
@@ -21,7 +21,7 @@ export class LengthMaximumAssert extends AssertChain {
   }
 
   validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (LengthMaximumAssert.isValid(this.maximum, value)) {
+    if (LengthMaximumAssert.isValid(this.maximum, value) === false) {
       violations.push(LengthMaximumAssert.CODE)
     }
 

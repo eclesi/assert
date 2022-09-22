@@ -1,5 +1,5 @@
-import { Violations } from '@/types'
-import { AssertChain } from '@/assertChain'
+import { AssertChain } from '../assertChain'
+import { Violations } from '../types'
 
 export class StringAssert extends AssertChain {
   public readonly CODE = 'string_type_mismatch'

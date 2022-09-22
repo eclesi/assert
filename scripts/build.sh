@@ -1,3 +1,3 @@
 #!/bin/bash
 rm -rf ./build
-tsc -d --declarationMap --project ./tsconfig.prod.json
+tsc -d --project ./tsconfig.prod.json  || exit 1

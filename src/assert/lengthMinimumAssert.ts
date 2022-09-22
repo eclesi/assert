@@ -1,5 +1,5 @@
-import { AssertChain } from '@/assertChain'
-import { Violations } from '@/types'
+import { AssertChain } from '../assertChain'
+import { Violations } from '../types'
 
 export class LengthMinimumAssert extends AssertChain {
   public static readonly CODE = 'length_out_of_minimum'
@@ -21,7 +21,7 @@ export class LengthMinimumAssert extends AssertChain {
   }
 
   validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (LengthMinimumAssert.isValid(this.minimum, value)) {
+    if (LengthMinimumAssert.isValid(this.minimum, value) === false) {
       violations.push(LengthMinimumAssert.CODE)
     }
 

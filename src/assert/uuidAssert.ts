@@ -1,5 +1,5 @@
-import { AssertChain } from '@/assertChain'
-import { Violations } from '@/types'
+import { AssertChain } from '../assertChain'
+import { Violations } from '../types'
 
 export class UuidAssert extends AssertChain {
   public static readonly CODE = 'uuid_type_mismatch'
