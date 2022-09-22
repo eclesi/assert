@@ -38,11 +38,11 @@ export class Assert {
     return validator
   }
 
-  static schemaStrict(schema: AnySchema): AssertSchema {
+  static strict(schema: AnySchema): AssertSchema {
     return new AssertSchema(schema, true)
   }
 
-  static schemaLoose(schema: AnySchema): AssertSchema {
+  static loose(schema: AnySchema): AssertSchema {
     return new AssertSchema(schema, false)
   }
 

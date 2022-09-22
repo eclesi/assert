@@ -2,7 +2,7 @@ import { Assert } from '@/assert'
 
 describe('Assert Schema', () => {
   it('Should return undefined when the input is valid', () => {
-    const schema = Assert.schemaStrict({
+    const schema = Assert.strict({
       email: Assert.required().string().email(),
       phone: Assert.required().string().phone(),
       password: Assert.required().string().lengthMinimum(8)
@@ -14,7 +14,7 @@ describe('Assert Schema', () => {
   })
 
   it('Should return undefined when the input is valid', () => {
-    const schema = Assert.schemaStrict({
+    const schema = Assert.strict({
       email: Assert.required().string().email(),
       phone: Assert.required().string().phone(),
       password: Assert.required().string().lengthMinimum(8)
@@ -31,7 +31,7 @@ describe('Assert Schema', () => {
   })
 
   it('Should return violations when the input is empty', () => {
-    const schema = Assert.schemaStrict({
+    const schema = Assert.strict({
       email: Assert.required().string().email(),
       phone: Assert.required().string().phone(),
       password: Assert.required().string().lengthMinimum(8)
@@ -46,7 +46,7 @@ describe('Assert Schema', () => {
   })
 
   it('Should return undefined when the input is empty but all assertions are optional', () => {
-    const schema = Assert.schemaStrict({
+    const schema = Assert.strict({
       email: Assert.optional().string().email(),
       phone: Assert.optional().string().phone(),
       password: Assert.optional().string().lengthMinimum(8)
@@ -56,7 +56,7 @@ describe('Assert Schema', () => {
   })
 
   it('Should return violations when the input is empty and at least one assertion is required', () => {
-    const schema = Assert.schemaStrict({
+    const schema = Assert.strict({
       email: Assert.required().string().email(),
       phone: Assert.optional().string().phone(),
       password: Assert.optional().string().lengthMinimum(8)
