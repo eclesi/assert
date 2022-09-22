@@ -1,6 +1,6 @@
 import { Assert } from '@/assert'
 
-describe('Email Assert', () => {
+describe('Uuid Assert', () => {
   it('Should return undefined when the uuid is valid', () => {
     const assert = Assert.required().uuid()
     expect(assert.validate('d904bb89-e3f3-4d2e-991c-e92b11226cf5')).toBeUndefined()

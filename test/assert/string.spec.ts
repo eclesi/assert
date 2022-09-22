@@ -1,6 +1,6 @@
 import { Assert } from '@/assert'
 
-describe('Email Assert', () => {
+describe('String Assert', () => {
   it('Should return undefined when the string is valid', () => {
     const assert = Assert.required().string()
     expect(assert.validate('Any String')).toBeUndefined()

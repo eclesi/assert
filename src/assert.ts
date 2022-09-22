@@ -1,16 +1,17 @@
 import { uniq } from 'lodash'
 
+import { AnySchema, Violations } from './types'
 import AssertChain from './assertChain'
 import AssertSchema from './assertSchema'
 import EmailAssert from './assert/emailAssert'
 import LengthMaximumAssert from './assert/lengthMaximumAssert'
 import LengthMinimumAssert from './assert/lengthMinimumAssert'
+import NumberAssert from './assert/numberAssert'
 import OptionalAssert from './assert/optionalAssert'
+import PhoneAssert from './assert/phoneAssert'
 import RequiredAssert from './assert/requiredAssert'
 import StringAssert from './assert/stringAssert'
 import UuidAssert from './assert/uuidAssert'
-import PhoneAssert from './assert/phoneAssert'
-import { AnySchema, Violations } from './types'
 
 export class Assert {
   public headAssert: AssertChain
@@ -46,6 +47,13 @@ export class Assert {
 
   string(): Assert {
     const assert = new StringAssert()
+    this.tail(assert)
+
+    return this
+  }
+
+  number(): Assert {
+    const assert = new NumberAssert()
     this.tail(assert)
 
     return this
