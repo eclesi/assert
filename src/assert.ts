@@ -1,4 +1,4 @@
-import { uniq } from 'lodash'
+import { unique } from 'radash'
 
 import { AnySchema, AssertOptions, Violations } from './types'
 import { AssertChain } from './assertChain'
@@ -115,7 +115,7 @@ export class Assert {
       return undefined
     }
 
-    return uniq(violations)
+    return unique(violations)
   }
 
   validate(value: unknown): Violations | undefined {
@@ -129,7 +129,7 @@ export class Assert {
       return undefined
     }
 
-    return uniq(violations)
+    return unique(violations)
   }
 
   protected tail(assert: AssertChain): void {

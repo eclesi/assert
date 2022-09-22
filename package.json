@@ -1,7 +1,7 @@
 {
   "name": "eclesi-schema-assert",
   "description": "Extensible and easy to use input validation library",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "author": "Alef Castelo <alefaraujocastelo@gmail.com>",
   "license": "MIT",
   "keywords": [
