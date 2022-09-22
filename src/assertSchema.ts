@@ -1,7 +1,7 @@
-import { get, set, isEmpty, isObject, keys } from 'lodash'
 import { RequiredAssert } from './assert/requiredAssert'
 import { Assert } from './assert'
 import { AnySchema, SchemaViolation } from './types'
+import { OptionalAssert } from './assert/optionalAssert'
 
 export class AssertSchema {
   constructor(protected readonly schema: AnySchema, protected readonly strict: boolean) {}
@@ -9,21 +9,33 @@ export class AssertSchema {
   protected strictTypeMismatch(value: unknown): SchemaViolation {
     const violations = {}
 
+    if (typeof value !== 'object') {
+      return violations
+    }
+
     let required = 0
+    let optional = 0
+
     for (const key in this.schema) {
       if (this.schema[key].headAssert instanceof RequiredAssert) {
         required += 1
       }
-    }
 
-    if (!isObject(value)) {
-      violations['schema'] = ['strict_type_mismatch']
-    }
-
-    if (this.strict && isObject(value)) {
-      if (keys(value).length < required) {
-        violations['schema'] = ['strict_type_mismatch']
+      if (this.schema[key].headAssert instanceof OptionalAssert) {
+        optional += 1
       }
+    }
+
+    if (this.strict === false) {
+      return violations
+    }
+
+    if (required === 0) {
+      return violations
+    }
+
+    if (Object.keys(value).length !== required + optional) {
+      violations['schema'] = ['strict_type_mismatch']
     }
 
     return violations
@@ -33,14 +45,14 @@ export class AssertSchema {
     const violations = this.strictTypeMismatch(value)
 
     for (const key in this.schema) {
-      const assert = get(this.schema, key)
-      const input = get(value, key)
+      const assert = this.schema[key]
+      const input = value[key]
 
       if (assert instanceof Assert) {
         const result = assert.validate(input)
 
         if (result !== undefined) {
-          set(violations, key, result)
+          violations[key] = result
         }
 
         continue
@@ -50,11 +62,11 @@ export class AssertSchema {
       const result = assertSchema.validate(input)
 
       if (result !== undefined) {
-        set(violations, key, result)
+        violations[key] = result
       }
     }
 
-    if (isEmpty(violations)) {
+    if (Object.keys(violations).length === 0) {
       return undefined
     }
 
@@ -65,14 +77,14 @@ export class AssertSchema {
     const violations = this.strictTypeMismatch(value)
 
     for (const key in this.schema) {
-      const assert = get(this.schema, key)
-      const input = get(value, key)
+      const assert = this.schema[key]
+      const input = value[key]
 
       if (assert instanceof Assert) {
         const result = await assert.validateAsync(input)
 
         if (result !== undefined) {
-          set(violations, key, result)
+          violations[key] = result
         }
 
         continue
@@ -82,11 +94,11 @@ export class AssertSchema {
       const result = assertSchema.validate(input)
 
       if (result !== undefined) {
-        set(violations, key, result)
+        violations[key] = result
       }
     }
 
-    if (isEmpty(violations)) {
+    if (Object.keys(violations).length === 0) {
       return undefined
     }
 
