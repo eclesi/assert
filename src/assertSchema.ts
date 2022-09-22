@@ -17,11 +17,20 @@ export class AssertSchema {
     let optional = 0
 
     for (const key in this.schema) {
-      if (this.schema[key].headAssert instanceof RequiredAssert) {
-        required += 1
+      const assert = this.schema[key]
+      if (assert instanceof AssertSchema) {
+        if (assert.strict === true) required += 1
+        if (assert.strict === false) optional += 1
+
+        continue
       }
 
-      if (this.schema[key].headAssert instanceof OptionalAssert) {
+      if (assert.headAssert instanceof RequiredAssert) {
+        required += 1
+        continue
+      }
+
+      if (assert.headAssert instanceof OptionalAssert) {
         optional += 1
       }
     }
@@ -46,7 +55,7 @@ export class AssertSchema {
 
     for (const key in this.schema) {
       const assert = this.schema[key]
-      const input = value[key]
+      const input = value?.[key]
 
       if (assert instanceof Assert) {
         const result = assert.validate(input)
@@ -58,8 +67,7 @@ export class AssertSchema {
         continue
       }
 
-      const assertSchema = new AssertSchema(assert, this.strict)
-      const result = assertSchema.validate(input)
+      const result = assert.validate(input)
 
       if (result !== undefined) {
         violations[key] = result
@@ -90,8 +98,7 @@ export class AssertSchema {
         continue
       }
 
-      const assertSchema = new AssertSchema(assert, this.strict)
-      const result = assertSchema.validate(input)
+      const result = assert.validate(input)
 
       if (result !== undefined) {
         violations[key] = result

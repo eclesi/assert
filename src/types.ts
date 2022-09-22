@@ -1,4 +1,5 @@
 import { Assert } from './assert'
+import { AssertSchema } from './assertSchema'
 
 export type Violations = string[]
 
@@ -12,7 +13,7 @@ export type AssertOptions = {
 }
 
 export type AnySchema = {
-  [key: string]: Assert | AnySchema
+  [key: string]: Assert | AssertSchema
 }
 
 export type SchemaViolation = {
