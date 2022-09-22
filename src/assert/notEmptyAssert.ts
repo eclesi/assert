@@ -1,23 +1,21 @@
+import { isEmpty } from 'radash'
 import { AssertChain } from '../assertChain'
 import { Violations } from '../types'
 
-export class RequiredAssert extends AssertChain {
-  public static readonly CODE = 'required'
+export class NotEmptyAssert extends AssertChain {
+  public static readonly CODE = 'not_empty'
 
   static isValid(value: unknown): boolean {
-    if (value === undefined) {
+    if (isEmpty(value)) {
       return false
     }
 
-    if (value === null) {
-      return false
-    }
     return true
   }
 
   validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (RequiredAssert.isValid(value) === false) {
-      violations.push(RequiredAssert.CODE)
+    if (NotEmptyAssert.isValid(value) === false) {
+      violations.push(NotEmptyAssert.CODE)
     }
 
     return this.next(violations, value)

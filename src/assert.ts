@@ -12,6 +12,7 @@ import { PhoneAssert } from './assert/phoneAssert'
 import { RequiredAssert } from './assert/requiredAssert'
 import { StringAssert } from './assert/stringAssert'
 import { UuidAssert } from './assert/uuidAssert'
+import { NotEmptyAssert } from './assert/notEmptyAssert'
 
 export class Assert {
   public headAssert: AssertChain
@@ -88,6 +89,13 @@ export class Assert {
 
   lengthMaximum(maximum: number): Assert {
     const assert = new LengthMaximumAssert(maximum)
+    this.tail(assert)
+
+    return this
+  }
+
+  notEmpty(): Assert {
+    const assert = new NotEmptyAssert()
     this.tail(assert)
 
     return this
