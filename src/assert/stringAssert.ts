@@ -1,14 +1,14 @@
 import { AssertChain } from '../assertChain'
-import { Violations } from '../types'
+import { AssertOptions } from '../types'
 
 export class StringAssert extends AssertChain {
-  public readonly CODE = 'string_type_mismatch'
+  public static readonly MESSAGE = 'string_type_mismatch'
 
-  validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (typeof value !== 'string') {
-      violations.push(this.CODE)
-    }
+  constructor(options?: AssertOptions) {
+    super(options ?? { message: StringAssert.MESSAGE })
+  }
 
-    return this.next(violations, value)
+  isValid(value: unknown): boolean {
+    return typeof value === 'string'
   }
 }

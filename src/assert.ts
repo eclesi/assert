@@ -1,25 +1,25 @@
 import { uniq } from 'lodash'
 
-import { AnySchema, Violations } from './types'
+import { AnySchema, AssertOptions, Violations } from './types'
 import { AssertChain } from './assertChain'
 import { AssertSchema } from './assertSchema'
 import { EmailAssert } from './assert/emailAssert'
 import { LengthMaximumAssert } from './assert/lengthMaximumAssert'
 import { LengthMinimumAssert } from './assert/lengthMinimumAssert'
+import { NotEmptyAssert } from './assert/notEmptyAssert'
 import { NumberAssert } from './assert/numberAssert'
 import { OptionalAssert } from './assert/optionalAssert'
 import { PhoneAssert } from './assert/phoneAssert'
 import { RequiredAssert } from './assert/requiredAssert'
 import { StringAssert } from './assert/stringAssert'
 import { UuidAssert } from './assert/uuidAssert'
-import { NotEmptyAssert } from './assert/notEmptyAssert'
 
 export class Assert {
   public headAssert: AssertChain
   public tailAssert: AssertChain
 
-  static required(): Assert {
-    const assert = new RequiredAssert()
+  static required(options?: AssertOptions): Assert {
+    const assert = new RequiredAssert(options)
 
     const validator = new Assert()
     validator.headAssert = assert
@@ -28,8 +28,8 @@ export class Assert {
     return validator
   }
 
-  static optional(): Assert {
-    const assert = new OptionalAssert()
+  static optional(options?: AssertOptions): Assert {
+    const assert = new OptionalAssert(options)
 
     const validator = new Assert()
     validator.headAssert = assert
@@ -46,22 +46,22 @@ export class Assert {
     return new AssertSchema(schema, false)
   }
 
-  string(): Assert {
-    const assert = new StringAssert()
+  string(options?: AssertOptions): Assert {
+    const assert = new StringAssert(options)
     this.tail(assert)
 
     return this
   }
 
-  number(): Assert {
-    const assert = new NumberAssert()
+  number(options?: AssertOptions): Assert {
+    const assert = new NumberAssert(options)
     this.tail(assert)
 
     return this
   }
 
-  email(): Assert {
-    const assert = new EmailAssert()
+  email(options?: AssertOptions): Assert {
+    const assert = new EmailAssert(options)
     this.tail(assert)
 
     return this
@@ -73,36 +73,36 @@ export class Assert {
     return this
   }
 
-  phone(): Assert {
-    const assert = new PhoneAssert()
+  phone(options?: AssertOptions): Assert {
+    const assert = new PhoneAssert(options)
     this.tail(assert)
 
     return this
   }
 
-  lengthMinimum(minimum: number): Assert {
-    const assert = new LengthMinimumAssert(minimum)
+  lengthMinimum(minimum: number, options?: AssertOptions): Assert {
+    const assert = new LengthMinimumAssert(minimum, options)
     this.tail(assert)
 
     return this
   }
 
-  lengthMaximum(maximum: number): Assert {
-    const assert = new LengthMaximumAssert(maximum)
+  lengthMaximum(maximum: number, options?: AssertOptions): Assert {
+    const assert = new LengthMaximumAssert(maximum, options)
     this.tail(assert)
 
     return this
   }
 
-  notEmpty(): Assert {
-    const assert = new NotEmptyAssert()
+  notEmpty(options?: AssertOptions): Assert {
+    const assert = new NotEmptyAssert(options)
     this.tail(assert)
 
     return this
   }
 
-  uuid(): Assert {
-    const assert = new UuidAssert()
+  uuid(options?: AssertOptions): Assert {
+    const assert = new UuidAssert(options)
     this.tail(assert)
 
     return this

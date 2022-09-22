@@ -1,30 +1,22 @@
 import { AssertChain } from '../assertChain'
-import { Violations } from '../types'
+import { AssertOptions } from '../types'
 
 export class LengthMaximumAssert extends AssertChain {
-  public static readonly CODE = 'length_out_of_maximum'
+  public static readonly MESSAGE = 'length_out_of_maximum'
 
-  constructor(protected readonly maximum: number) {
-    super()
+  constructor(protected readonly maximum: number, options?: AssertOptions) {
+    super(options ?? { message: LengthMaximumAssert.MESSAGE })
   }
 
-  static isValid(maximum: number, value: unknown): boolean {
+  isValid(value: unknown): boolean {
     if (typeof value !== 'string') {
       return false
     }
 
-    if (value.length > maximum) {
+    if (value.length > this.maximum) {
       return false
     }
 
     return true
-  }
-
-  validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (LengthMaximumAssert.isValid(this.maximum, value) === false) {
-      violations.push(LengthMaximumAssert.CODE)
-    }
-
-    return this.next(violations, value)
   }
 }

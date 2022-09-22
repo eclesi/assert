@@ -1,14 +1,14 @@
 import { AssertChain } from '../assertChain'
-import { Violations } from '../types'
+import { AssertOptions } from '../types'
 
 export class NumberAssert extends AssertChain {
-  public readonly CODE = 'number_type_mismatch'
+  public static readonly MESSAGE = 'number_type_mismatch'
 
-  validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (typeof value !== 'number') {
-      violations.push(this.CODE)
-    }
+  constructor(options?: AssertOptions) {
+    super(options ?? { message: NumberAssert.MESSAGE })
+  }
 
-    return this.next(violations, value)
+  isValid(value: unknown): boolean {
+    return typeof value === 'number'
   }
 }

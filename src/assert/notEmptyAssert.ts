@@ -1,23 +1,15 @@
 import { isEmpty } from 'radash'
 import { AssertChain } from '../assertChain'
-import { Violations } from '../types'
+import { AssertOptions } from '../types'
 
 export class NotEmptyAssert extends AssertChain {
-  public static readonly CODE = 'not_empty'
+  public static readonly MESSAGE = 'empty'
 
-  static isValid(value: unknown): boolean {
-    if (isEmpty(value)) {
-      return false
-    }
-
-    return true
+  constructor(options?: AssertOptions) {
+    super(options ?? { message: NotEmptyAssert.MESSAGE })
   }
 
-  validate(violations: Violations, value: unknown): Promise<Violations> | Violations {
-    if (NotEmptyAssert.isValid(value) === false) {
-      violations.push(NotEmptyAssert.CODE)
-    }
-
-    return this.next(violations, value)
+  isValid(value: unknown): boolean {
+    return isEmpty(value) === false
   }
 }
