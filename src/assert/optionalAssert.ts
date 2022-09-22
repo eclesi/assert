@@ -3,10 +3,8 @@ import { AssertChain } from '../assertChain'
 import { AssertOptions, Violations } from '../types'
 
 export class OptionalAssert extends AssertChain {
-  public static readonly MESSAGE = 'required'
-
-  constructor(options?: AssertOptions) {
-    super(options ?? { message: OptionalAssert.MESSAGE })
+  constructor(options: AssertOptions = { message: 'optional' }) {
+    super(options)
   }
 
   isValid(value: unknown): boolean {

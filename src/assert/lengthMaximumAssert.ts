@@ -2,10 +2,11 @@ import { AssertChain } from '../assertChain'
 import { AssertOptions } from '../types'
 
 export class LengthMaximumAssert extends AssertChain {
-  public static readonly MESSAGE = 'length_out_of_maximum'
-
-  constructor(protected readonly maximum: number, options?: AssertOptions) {
-    super(options ?? { message: LengthMaximumAssert.MESSAGE })
+  constructor(
+    protected readonly maximum: number,
+    options: AssertOptions = { message: 'length_out_of_maximum' }
+  ) {
+    super(options)
   }
 
   isValid(value: unknown): boolean {

@@ -3,10 +3,8 @@ import { AssertChain } from '../assertChain'
 import { AssertOptions } from '../types'
 
 export class NotEmptyAssert extends AssertChain {
-  public static readonly MESSAGE = 'empty'
-
-  constructor(options?: AssertOptions) {
-    super(options ?? { message: NotEmptyAssert.MESSAGE })
+  constructor(options: AssertOptions = { message: 'empty' }) {
+    super(options)
   }
 
   isValid(value: unknown): boolean {

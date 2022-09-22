@@ -2,10 +2,11 @@ import { AssertChain } from '../assertChain'
 import { AssertOptions } from '../types'
 
 export class LengthMinimumAssert extends AssertChain {
-  public static readonly MESSAGE = 'length_out_of_minimum'
-
-  constructor(protected readonly minimum: number, options?: AssertOptions) {
-    super(options ?? { message: LengthMinimumAssert.MESSAGE })
+  constructor(
+    protected readonly minimum: number,
+    options: AssertOptions = { message: 'length_out_of_minimum' }
+  ) {
+    super(options)
   }
 
   isValid(value: unknown): boolean {

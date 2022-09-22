@@ -16,11 +16,7 @@ describe('Not Empty Assert', () => {
   })
 
   it('Should return violations when the value is empty', () => {
-    const assert = Assert.required({
-      message: value => {
-        return `VALUE ${value} IS NOT VALID`
-      }
-    }).notEmpty()
+    const assert = Assert.required().notEmpty()
     expect(assert.validate(undefined)).toStrictEqual(['required', 'empty'])
   })
 

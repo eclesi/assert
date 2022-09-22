@@ -2,10 +2,8 @@ import { AssertChain } from '../assertChain'
 import { AssertOptions } from '../types'
 
 export class RequiredAssert extends AssertChain {
-  public static readonly MESSAGE = 'required'
-
-  constructor(options?: AssertOptions) {
-    super(options ?? { message: RequiredAssert.MESSAGE })
+  constructor(options: AssertOptions = { message: 'required' }) {
+    super(options)
   }
 
   isValid(value: unknown): boolean {
