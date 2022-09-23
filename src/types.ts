@@ -3,6 +3,10 @@ import { AssertSchema } from './assertSchema'
 
 export type Violations = string[]
 
+export type Options = {
+  flat: boolean
+}
+
 export type AnyInput = {
   [key: string]: unknown
 }

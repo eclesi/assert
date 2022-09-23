@@ -1,7 +1,8 @@
 import { RequiredAssert } from './assert/requiredAssert'
 import { Assert } from './assert'
-import { AnySchema, SchemaViolation } from './types'
+import { AnySchema, Options, SchemaViolation } from './types'
 import { OptionalAssert } from './assert/optionalAssert'
+import { isObject, sift } from 'radash'
 
 export class AssertSchema {
   constructor(protected readonly schema: AnySchema, protected readonly strict: boolean) {}
@@ -50,7 +51,23 @@ export class AssertSchema {
     return violations
   }
 
-  validate(value: unknown): SchemaViolation | undefined {
+  flatten(input: Record<string, unknown>, prefix?: string): Record<string, unknown> {
+    let output: Record<string, unknown> = {}
+    for (const property in input) {
+      const item = input[property]
+
+      if (isObject(item)) {
+        output = { ...output, ...this.flatten(item as Record<string, unknown>, property) }
+        continue
+      }
+
+      output[sift([prefix, property]).join('.')] = item
+    }
+
+    return output
+  }
+
+  validate(value: unknown, options?: Options): SchemaViolation | undefined {
     const violations = this.strictTypeMismatch(value)
 
     for (const key in this.schema) {
@@ -78,10 +95,14 @@ export class AssertSchema {
       return undefined
     }
 
+    if (options?.flat) {
+      return this.flatten(violations) as SchemaViolation
+    }
+
     return violations
   }
 
-  async validateAsync(value: unknown): Promise<SchemaViolation | undefined> {
+  async validateAsync(value: unknown, options?: Options): Promise<SchemaViolation | undefined> {
     const violations = this.strictTypeMismatch(value)
 
     for (const key in this.schema) {
@@ -107,6 +128,10 @@ export class AssertSchema {
 
     if (Object.keys(violations).length === 0) {
       return undefined
+    }
+
+    if (options?.flat) {
+      return this.flatten(violations) as SchemaViolation
     }
 
     return violations
